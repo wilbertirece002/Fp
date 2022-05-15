@@ -11,7 +11,7 @@
     <div class="card-header">
         <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-             <a class="nav-link active" href="{{ url('home') }}">Home</a>
+             <a class="nav-link active" href="{{ url('/') }}">Home</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="{{ url('/products') }}">Products</a>
@@ -40,8 +40,8 @@
                 <th scope="row">{{ $category->id }}</th>
                 <td>{{ $category->CategoryCode}}</td>
                 <td>{{ $category->Description }}</td>
-                <td><a class="btn btn-primary mr-md-2" href="{{ url('/edit-product/'.$category->id) }}">Edit</a></td>
-                <div><td><a class="btn btn-danger ml-md-4" href="{{ url('/delete-product/'.$category->id) }}">Delete</a></td></div>
+                <td><a class="btn btn-primary mr-md-2" href="{{ url('/edit-category/'.$category->id) }}">Edit</a></td>
+                <div><td><a class="btn btn-danger ml-md-4" href="{{ url('/delete-category/'.$category->id) }}">Delete</a></td></div>
                 </tr>
             @endforeach
 </div>

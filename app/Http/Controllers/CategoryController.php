@@ -23,4 +23,19 @@ class CategoryController extends Controller
         Category::create($input);
         return redirect('/');
     }
+    public function edit($categoryid)
+    {
+        $categories = Category::find($categoryid);
+        return view('Category.editcategory', compact('categories'));
+    }
+    public function update(Request $request, $categoryid)
+    {
+        $input = $request->all();
+        $categories = Category::find($categoryid);
+        $categories->CategoryCode= $input['CategoryCode'];
+        $categories->Description= $input['Description'];
+
+        $categories->Save();
+        return redirect('/');
+    }
 }
