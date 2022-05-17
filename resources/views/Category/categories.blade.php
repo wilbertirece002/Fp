@@ -1,3 +1,4 @@
+@extends('Layout.template')
 <!doctype html>
 <html lang="en">
 
@@ -11,20 +12,9 @@
 </head>
 
 <body>
-    <div class="card text-center container">
-        <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/products') }}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
-                </li>
-            </ul>
-        </div>
+    @section('content')
+    @endsection
+    @section('cardcontent')
         @if (session('message'))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
                 <div class="alert alert-success">
@@ -52,16 +42,15 @@
                     <tr>
                         <td>{{ $category->CategoryCode }}</td>
                         <td>{{ $category->Description }}</td>
-                        <td><a class="btn btn-primary mr-md-2"
-                                href="{{ url('/edit-category/' . $category->id) }}">Edit</a></td>
+                        <td><a class="btn btn-primary mr-md-2" href="{{ url('/edit-category/' . $category->id) }}">Edit</a>
+                        </td>
                         <div>
-                            <td><a class="btn btn-danger ml-md-4"
-                                type="submit" class="btn btn-info btn-danger" data-toggle="modal"
-                                data-target="#myModal{{ $category->id }}">Delete</a></td>
+                            <td><a class="btn btn-danger ml-md-4" type="submit" class="btn btn-info btn-danger"
+                                    data-toggle="modal" data-target="#myModal{{ $category->id }}">Delete</a></td>
                         </div>
-                        
+
                     </tr>
                     @include('Modal.deletecategory')
                 @endforeach
-    </div>
+            @endsection
 </body>

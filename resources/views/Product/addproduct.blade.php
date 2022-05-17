@@ -1,3 +1,4 @@
+@extends('Layout.template')
 <!doctype html>
 <html lang="en">
 
@@ -11,28 +12,23 @@
 </head>
 
 <body>
-    <div class="container card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/.') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/products') }}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
-                </li>
-            </ul>
+    @section('content')
+    @endsection()
+    @section('cardcontent')
+        <div>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger" role="alert">
+                        {{ $error }}
+                    </div>
+                @endforeach
+            @endif
         </div>
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">
-                    {{ $error }}
-                </div>
-            @endforeach
-        @endif
-        <h1 class="mb-4 mt-4">Add product</h1>
+
+        <div>
+            <h1 class="mb-4 mt-4">Add product</h1>
+        </div>
+
         <form class="row g-3" method="post" action="{{ url('/add-product') }}">
             {{ csrf_field() }}
 
@@ -70,11 +66,12 @@
                 <input type="text" name="Price" class="form-control">
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary" href="{{ url('/add-product') }}     ">Add</button>
+                <button type="submit" class="btn btn-primary" href="{{ url('/add-product') }}">Add</button>
+                <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
             </div>
         </form>
-    </div>
-
+        </div>
+    @endsection()
 </body>
 
 </html>

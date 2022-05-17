@@ -1,31 +1,23 @@
+@extends('Layout.template')
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add product</title>
+    <title>Edit product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <div class="container card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/.') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/products') }}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
-                </li>
-            </ul>
+    @section('content')
+    @endsection
+    @section('cardcontent')
+        <div>
+            <h1 class="mb-4 mt-4">Edit product</h1>
         </div>
-        <h1 class="mb-4 mt-4">Edit product</h1>
         <form class="row g-3" method="post" action="{{ url('/update-product/' . $product->id) }}">
             {{ csrf_field() }}
 
@@ -67,9 +59,10 @@
             </div>
             <div class="col-12  ">
                 <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
             </div>
         </form>
-    </div>
+    @endsection
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+@extends('Layout.template')
 <!doctype html>
 <html lang="en">
 
@@ -11,20 +12,9 @@
 </head>
 
 <body>
-    <div class="container card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/.') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/products') }}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
-                </li>
-            </ul>
-        </div>
+    @section('content')
+    @endsection()
+    @section('cardcontent')
         @if ($errors->any())
             @foreach ($errors->all() as $error)
                 <div class="alert alet-danger" role="alert">
@@ -47,10 +37,10 @@
             </div>
             <div class="col-12  ">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button class="btn btn-default data-dismiss" href="{{ url('/categories') }}">Cancel</button>
+                <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
             </div>
         </form>
-    </div>
+    @endsection
 </body>
 
 </html>
