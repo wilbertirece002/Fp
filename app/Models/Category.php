@@ -8,7 +8,7 @@ use App\Models\Product;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable =['CategoryCode', 'Description'];
+    protected $fillable = ['CategoryCode', 'Description'];
     public function products()
     {
         return $this->hasMany(Product::class, 'Category');

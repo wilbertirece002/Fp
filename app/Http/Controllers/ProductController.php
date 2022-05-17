@@ -8,12 +8,13 @@ use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
 use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
     public function view()
     {
-        $products = Product::with('category')->get();
+        $products = Product::all();
         return view('Product.products', compact('products'));
     }
     public function create()
@@ -22,12 +23,20 @@ class ProductController extends Controller
         return view('Product.addproduct', compact('categories'));
     }
     public function store(Request $request)
-    
     {
-        $input  = $request->all();      
+        $request->validate([
+            'ProductName' => 'required|max:10',
+            'ProductCode' => 'required|unique:products,ProductCode|max:6', 
+            'Price' => 'required|numeric'
+        ]);
+        $input = $request->all();
         Product::create($input);
-        return redirect('/');   
-    }   
+        session()->flash(
+            'message',
+            $input['ProductName'] . ' successfully created.'
+        );
+        return redirect('/products');
+    }
     public function edit($productid)
     {
         $categories = Category::all();
@@ -46,11 +55,21 @@ class ProductController extends Controller
         $product->Size = $input['Size'];
         $product->Price = $input['Price'];
         $product->save();
-        return redirect('/');
+        session()->flash(
+            'message',
+            'Product ' . $product['ProductName'] . ' saved successfully '
+        );
+        return redirect('/products');
+        return redirect('/products');
     }
     public function delete($productid)
     {
-        Product::destroy($productid);
-        return redirect('/');
+        $deleteprod = Product::find($productid);
+        $deleteprod->delete($productid);
+        session()->flash(
+            'message',
+            $deleteprod['ProductName'] . ' successfully deleted.'
+        );
+        return redirect('/products');
     }
 }

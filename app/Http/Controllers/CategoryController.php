@@ -19,9 +19,18 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'CategoryCode'=> 'required'
+        ]);
         $input = $request->all();
         Category::create($input);
-        return redirect('/');
+        session()->flash(
+            'message',
+            'Category ' .
+                $input['CategoryCode'] .
+                ' successfully added new category.'
+        );
+        return redirect('/categories');
     }
     public function edit($categoryid)
     {
@@ -32,10 +41,23 @@ class CategoryController extends Controller
     {
         $input = $request->all();
         $categories = Category::find($categoryid);
-        $categories->CategoryCode= $input['CategoryCode'];
-        $categories->Description= $input['Description'];
-
+        $categories->CategoryCode = $input['CategoryCode'];
+        $categories->Description = $input['Description'];
+        session()->flash(
+            'message',
+            'Category ' . $input['CategoryCode'] . ' save successfully.'
+        );
         $categories->Save();
-        return redirect('/');
+        return redirect('/categories');
+    }
+    public function delete($categoryid)
+    {
+        $categoryid = Category::find($categoryid);
+        $categoryid->delete($categoryid);
+        session()->flash(
+            'message',
+            'Category ' . $categoryid['CategoryCode'] . ' deleted successfully.'
+        );
+        return redirect('/categories');
     }
 }

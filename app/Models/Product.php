@@ -8,9 +8,17 @@ use App\Models\Category;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable=['ProductName', 'ProductCode', 'Category', 'Description', 'Color', 'Size', 'Price'];
+    protected $fillable = [
+        'ProductName',
+        'ProductCode',
+        'Category',
+        'Description',
+        'Color',
+        'Size',
+        'Price',
+    ];
     public function category()
     {
-       return $this->belongsTo(Product::class, 'Category');
+        return $this->belongsTo(Category::class, 'Category');
     }
 }
