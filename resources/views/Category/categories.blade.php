@@ -1,4 +1,5 @@
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 

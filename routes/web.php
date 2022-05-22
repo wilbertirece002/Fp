@@ -44,10 +44,13 @@ Route::get(
     '/delete-category/{categoryid}',
     'App\Http\Controllers\CategoryController@delete'
 );
-
+//TESTS
 Route::get('/', function () {
     return view('HomePage.welcome');
 });
 Route::get('/modal', function () {
+    return view('Modal.deletemodal');
+});
+Route::get('/navbar', function () {
     return view('Modal.deletemodal');
 });

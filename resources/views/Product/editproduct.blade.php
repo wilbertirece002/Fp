@@ -1,4 +1,5 @@
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 
@@ -12,8 +13,6 @@
 </head>
 
 <body>
-    @section('content')
-    @endsection
     @section('cardcontent')
         <div>
             <h1 class="mb-4 mt-4">Edit product</h1>
@@ -35,7 +34,7 @@
                 <label for="category" class="form-label">Category</label>
                 <select class="form-select" name="Category">
                     @foreach ($categories as $category)
-                        <option>{{ $category->id }}</option>
+                        <option {{ old('Category', $product->Category) == $category->id ? 'selected' : '' }}>{{$category->id}}</option>
                     @endforeach
                 </select>
             </div>

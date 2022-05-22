@@ -1,4 +1,5 @@
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 
@@ -14,64 +15,58 @@
 </head>
 
 <body>
-    <div>
-        @section('content')
-        @endsection
-        @section('cardcontent')
-            @if (session('message'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
+    @section('cardcontent')
+        @if (session('message'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+                <div class="alert alert-success">
+                    {{ session('message') }}
                 </div>
-            @endif
-            <div class="justify-content">
-                <h2 class="mt-5">Products</h2>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
-                <a class="btn btn-primary float-right" href="{{ url('/add-product') }}">Add Product</a>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Product Code</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Price</th>
-                        </th>
-                        <th scope="col">Action</th>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($products as $product)
-                        <tr>
-                            <td>{{ $product->ProductName }}</td>
-                            <td>{{ $product->ProductCode }}</td>
-                            <td>{{ $product->category->CategoryCode ?? 'No Category' }}</td>
-                            <td>{{ $product->Description }}</td>
-                            <td>{{ $product->Color }}</td>
-                            <td>{{ $product->Size }}</td>
-                            <td>{{ $product->Price }}</td>
-                            <td><a class="btn btn-primary mr-md-2"
-                                    href="{{ url('/edit-product/' . $product->id) }}">Edit</a>
-                            </td>
-                            <div>
-                                <td><a type="submit" class="btn btn-info btn-danger" data-toggle="modal"
-                                        data-target="#myModal{{ $product->id }}">Delete</a></td>
-                            </div>
-                            @include('Modal.deletemodal')
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
+        @endif
+        <div>
+            <h1 class="mb-4 mt-4">Products</h1>
         </div>
-        @endsection
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+            <a class="btn btn-primary float-right" href="{{ url('/add-product') }}">Add Product</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Code</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Price</th>
+                    </th>
+                    <th scope="col">Action</th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->ProductName }}</td>
+                        <td>{{ $product->ProductCode }}</td>
+                        <td>{{ $product->category->id ?? 'No Category' }}</td>
+                        <td>{{ $product->Description }}</td>
+                        <td>{{ $product->Color }}</td>
+                        <td>{{ $product->Size }}</td>
+                        <td>{{ $product->Price }}</td>
+                        <td><a class="btn btn-primary mr-md-2" href="{{ url('/edit-product/' . $product->id) }}">Edit</a>
+                        </td>
+                        <div>
+                            <td><a type="submit" class="btn btn-info btn-danger" data-toggle="modal"
+                                    data-target="#myModal{{ $product->id }}">Delete</a></td>
+                        </div>
+                        @include('Modal.deletemodal')
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endsection
 
-    </body>
+</body>
 
-    </html>
+</html>

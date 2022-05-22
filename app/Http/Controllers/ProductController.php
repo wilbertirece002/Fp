@@ -60,7 +60,6 @@ class ProductController extends Controller
             'Product ' . $product['ProductName'] . ' saved successfully '
         );
         return redirect('/products');
-        return redirect('/products');
     }
     public function delete($productid)
     {

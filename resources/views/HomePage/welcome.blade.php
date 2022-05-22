@@ -1,4 +1,6 @@
+
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 
@@ -11,8 +13,6 @@
 </head>
 
 <body>
-    @section('content')
-    @endsection
     @section('cardcontent')
         <div class="card-body">
             <h5 class="card-title">Welcome to my website!</h5>

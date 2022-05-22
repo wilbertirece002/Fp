@@ -1,4 +1,5 @@
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 
@@ -12,8 +13,6 @@
 </head>
 
 <body>
-    @section('content')
-    @endsection()
     @section('cardcontent')
         @if ($errors->any())
             @foreach ($errors->all() as $error)

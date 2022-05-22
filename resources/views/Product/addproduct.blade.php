@@ -1,4 +1,5 @@
 @extends('Layout.template')
+@extends('Layout.navbar')
 <!doctype html>
 <html lang="en">
 
@@ -12,8 +13,6 @@
 </head>
 
 <body>
-    @section('content')
-    @endsection()
     @section('cardcontent')
         <div>
             @if ($errors->any())
@@ -34,11 +33,11 @@
 
             <div class="col-md-6">
                 <label for="ProductName" class="form-label">Product Name</label>
-                <input type="text" name="ProductName" class="form-control">
+                <input type="text" name="ProductName" class="form-control" required>
             </div>
             <div class="col-md-6">
-                <label for="productcode" class="form-label">Product Code</label>
-                <input type="text" name="ProductCode" class="form-control">
+                <label for="productcode" class="form-label"</label>Product Code</label>
+                <input type="text" name="ProductCode" class="form-control" value{{ old('ProductCode') }} required>
             </div>
             <div class="col-md-6">
                 <label for="category" class="form-label">Category</label>
@@ -50,8 +49,8 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" name="Description" placeholder="....">
+                <label for="description" class="form-label" >Description</label>
+                <input type="text" class="form-control" name="Description" placeholder="...." >
             </div>
             <div class="col-12">
                 <label for="color" class="form-label">Color</label>
